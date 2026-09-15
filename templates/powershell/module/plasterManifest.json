@@ -1,0 +1,144 @@
+{
+  "$schema": "https://raw.githubusercontent.com/PowerShellOrg/Plaster/v2/schema/plaster-manifest-v2.json",
+  "schemaVersion": "2.0",
+  "metadata": {
+    "name": "PSModule",
+    "id": "83325cde-fbae-4447-ad85-327728ace043",
+    "version": "1.0.0",
+    "title": "PSModule",
+    "description": "Scaffolds a new PowerShell module, along with a README.md file.",
+    "author": "Wouter van den Meulenhof",
+    "templateType": "Project"
+  },
+  "parameters": [
+    {
+      "name": "ModuleGuid",
+      "type": "text",
+      "prompt": "Enter the desired GUID of the module. E.g., '00000000-0000-0000-0000-000000000000'."
+    },
+    {
+      "name": "ModuleName",
+      "type": "text",
+      "prompt": "Enter the desired name of the module without the .psd1 or .psm1 extensions. E.g., 'MyModule'."
+    },
+    {
+      "name": "ModuleDescription",
+      "type": "text",
+      "prompt": "Enter a short description of the module. E.g., 'This module provides utilities for managing files.'"
+    },
+    {
+      "name": "CompanyName",
+      "type": "text",
+      "prompt": "Enter the company or vendor name. E.g. 'My Company'."
+    },
+    {
+      "name": "AuthorName",
+      "type": "text",
+      "prompt": "Enter the author's name. E.g. 'FirstName LastName'."
+    },
+    {
+      "name": "AuthorEmail",
+      "type": "text",
+      "prompt": "Enter the author's email address. E.g. 'user@example.nl'."
+    },
+    {
+      "name": "Date",
+      "type": "text",
+      "prompt": "Enter the date in Dutch format. E.g. 'DD-MM-YYYY'."
+    },
+    {
+      "name": "Version",
+      "type": "text",
+      "prompt": "Enter the version of the script. Please follow semantic versioning (e.g., '1.0.0')."
+    }
+  ],
+  "content": [
+    {
+      "type": "file",
+      "source": "module.psm1",
+      "destination": "${ModuleName}.psm1"
+    },
+    {
+      "type": "file",
+      "source": "module.psd1",
+      "destination": "${ModuleName}.psd1"
+    },
+    {
+      "type": "file",
+      "source": "README.md",
+      "destination": "README.md"
+    },
+    {
+      "type": "modify",
+      "path": "${ModuleName}.psd1",
+      "modifications": [
+        {
+          "type": "replace",
+          "search": "\\{\\{Date\\}\\}",
+          "replace": "${Date}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{ModuleName\\}\\}",
+          "replace": "${ModuleName}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{Version\\}\\}",
+          "replace": "${Version}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{ModuleGuid\\}\\}",
+          "replace": "${ModuleGuid}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{AuthorName\\}\\}",
+          "replace": "${AuthorName}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{AuthorEmail\\}\\}",
+          "replace": "${AuthorEmail}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{CompanyName\\}\\}",
+          "replace": "${CompanyName}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{ModuleDescription\\}\\}",
+          "replace": "${ModuleDescription}"
+        }
+      ]
+    },
+    {
+      "type": "modify",
+      "path": "README.md",
+      "modifications": [
+        {
+          "type": "replace",
+          "search": "# \\{\\{ModuleName\\}\\}",
+          "replace": "# ${ModuleName}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{ModuleDescription\\}\\}",
+          "replace": "${ModuleDescription}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{AuthorName\\}\\}",
+          "replace": "${AuthorName}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{AuthorEmail\\}\\}",
+          "replace": "${AuthorEmail}"
+        }
+      ]
+    }
+  ]
+}
