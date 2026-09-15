@@ -1,0 +1,114 @@
+{
+  "$schema": "https://raw.githubusercontent.com/PowerShellOrg/Plaster/v2/schema/plaster-manifest-v2.json",
+  "schemaVersion": "2.0",
+  "metadata": {
+    "name": "PSScript",
+    "id": "0269ed25-9604-4acc-b294-cca80048e1e3",
+    "version": "1.0.0",
+    "title": "PSScript",
+    "description": "Scaffolds a new PowerShell script or Azure Automation runbook, along with a README.md file.",
+    "author": "Wouter van den Meulenhof",
+    "templateType": "Project"
+  },
+  "parameters": [
+    {
+      "name": "ScriptName",
+      "type": "text",
+      "prompt": "Enter the desired name of the script without the .ps1 extension. E.g., Verb-Noun, conforming to the PowerShell naming conventions."
+    },
+    {
+      "name": "ScriptSynopsis",
+      "type": "text",
+      "prompt": "Enter a brief synopsis of the script's functionality."
+    },
+    {
+      "name": "AuthorName",
+      "type": "text",
+      "prompt": "Enter the author's name. E.g. FirstName LastName."
+    },
+    {
+      "name": "AuthorEmail",
+      "type": "text",
+      "prompt": "Enter the author's email address. E.g. user@example.nl."
+    },
+    {
+      "name": "Date",
+      "type": "text",
+      "prompt": "Enter the date in Dutch format. E.g. DD-MM-YYYY."
+    },
+    {
+      "name": "Version",
+      "type": "text",
+      "prompt": "Enter the version of the script. Please follow semantic versioning (e.g., 1.0.0)."
+    }
+  ],
+  "content": [
+    {
+      "type": "file",
+      "source": "script.ps1",
+      "destination": "${ScriptName}.ps1"
+    },
+    {
+      "type": "file",
+      "source": "README.md",
+      "destination": "README.md"
+    },
+    {
+      "type": "modify",
+      "path": "${ScriptName}.ps1",
+      "modifications": [
+        {
+          "type": "replace",
+          "search": "\\{\\{ScriptSynopsis\\}\\}",
+          "replace": "${ScriptSynopsis}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{AuthorName\\}\\}",
+          "replace": "${AuthorName}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{AuthorEmail\\}\\}",
+          "replace": "${AuthorEmail}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{Date\\}\\}",
+          "replace": "${Date}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{Version\\}\\}",
+          "replace": "${Version}"
+        }
+      ]
+    },
+    {
+      "type": "modify",
+      "path": "README.md",
+      "modifications": [
+        {
+          "type": "replace",
+          "search": "\\{\\{ScriptName\\}\\}",
+          "replace": "${ScriptName}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{ScriptSynopsis\\}\\}",
+          "replace": "${ScriptSynopsis}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{AuthorName\\}\\}",
+          "replace": "${AuthorName}"
+        },
+        {
+          "type": "replace",
+          "search": "\\{\\{AuthorEmail\\}\\}",
+          "replace": "${AuthorEmail}"
+        }
+      ]
+    }
+  ]
+}
